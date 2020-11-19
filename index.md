@@ -36,6 +36,11 @@ poi installiamo i pacchetti base (webpack e webpack-cli)
 
 npm install webpack webpack-cli --save-dev
 
+e inizializziamo  il nostro progetto proprio come un progetto webpack
+
+webpack init
+
+che ci chiede di installare un nuovo pacchetto init. 
 Infine creiamo una semplice struttura nella cartella del nostro progetto
 
 esercizio
@@ -44,5 +49,39 @@ esercizio
  |- /src
    |- main.js
 	 
-in pratica possiamo aggiungere il file index.html nella root e un file main.js nella cartella src
+in pratica possiamo aggiungere il file index.html nella root e un file main.js nella cartella src, già che ci siamo inseriamo anche un altro file, un modulo per il nostro bundle e lo chiamiamo ./src/hello.js, che prende in ingresso un nome e un elemento e aggiunge un saluto nel testo dell'elemento:
+
+// hello.js
+module.exports = function (name, element) { element.textContent = 'Hello' + name + '!'; };
+
+Quindi in main.js possiamo utilizzare il nostro modulo:
+
+// main.js
+var sayHello = require ('./hello'); 
+sayHello('Guybrush', document.querySelector ('h2'));
+
+Già ci sentiamo dei supereroi del bundle. ma cosa manca?
+
+da riga di comando basterà scrivere 
+webpack ./src/main.js
+
+sarà generata automaticamente una cartella dist con il nostro bundle main.js
+
+includiamo il nostro bundle in index.html
+
+<!-- index.html -->
+<!doctype html>
+<html>
+<body>
+    <h2></h2>
+    <script src="dist/main.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
 
